@@ -23,6 +23,98 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
+
+def _apply_professional_styles() -> None:
+    st.markdown(
+        """
+        <style>
+        .stApp {
+            background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
+        }
+        .block-container {
+            padding-top: 1.5rem;
+            padding-bottom: 2.5rem;
+        }
+        [data-testid="stSidebar"] {
+            background: linear-gradient(180deg, #0f172a 0%, #111827 100%);
+            color: #f8fafc;
+        }
+        [data-testid="stSidebar"] .stButton > button {
+            border: 1px solid rgba(255,255,255,0.16);
+            border-radius: 0.75rem;
+            background: rgba(255,255,255,0.12);
+            color: #ffffff;
+            font-weight: 600;
+            transition: 180ms ease-in-out;
+        }
+        [data-testid="stSidebar"] .stButton > button:hover {
+            border-color: rgba(255,255,255,0.28);
+            background: rgba(255,255,255,0.18);
+        }
+        [data-testid="stSidebar"] .stTextInput > div > div > input {
+            background: rgba(255,255,255,0.95);
+            color: #0f172a;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        [data-testid="stSidebar"] label,
+        [data-testid="stSidebar"] .st-bd,
+        [data-testid="stSidebar"] .st-emotion-cache-1jicfl2,
+        [data-testid="stSidebar"] .st-emotion-cache-10trblm {
+            color: #f8fafc !important;
+        }
+        [data-testid="stSidebar"] .stRadio > label,
+        [data-testid="stSidebar"] .stSelectbox > label {
+            color: #f8fafc;
+        }
+        [data-testid="stSidebar"] .stRadio > div {
+            background: rgba(255,255,255,0.04);
+            border-radius: 0.6rem;
+            padding: 0.4rem 0.5rem;
+        }
+        .hero-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(248,250,252,0.95) 100%);
+            border: 1px solid rgba(148, 163, 184, 0.22);
+            border-radius: 1rem;
+            padding: 1.2rem 1.3rem;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+            margin-bottom: 1rem;
+        }
+        .hero-kicker {
+            display: inline-block;
+            padding: 0.25rem 0.6rem;
+            border-radius: 999px;
+            background: #eff6ff;
+            color: #1d4ed8;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+        .info-box {
+            background: rgba(248, 250, 252, 0.9);
+            border: 1px solid rgba(148, 163, 184, 0.28);
+            border-radius: 0.9rem;
+            padding: 0.9rem 1rem;
+            color: #334155;
+        }
+        .stChatMessage {
+            border-radius: 0.8rem;
+            padding: 0.4rem 0.6rem;
+        }
+        div[data-testid="stExpander"] {
+            border: 1px solid rgba(148, 163, 184, 0.24);
+            border-radius: 0.8rem;
+            padding: 0.2rem 0.25rem;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+_apply_professional_styles()
+
 # =========================
 # Session state helpers
 # =========================
@@ -98,7 +190,8 @@ _ensure_active_chat()
 # Sidebar — Conversation dashboard
 # =========================
 with st.sidebar:
-    st.header("💬 Conversations")
+    st.markdown("### 💬 Conversation workspace")
+    st.caption("Organize review analyses and switch between topics effortlessly.")
 
     # New chat button
     if st.button("➕ New chat", use_container_width=True):
@@ -140,8 +233,32 @@ with st.sidebar:
 # =========================
 # Main — Chat UI
 # =========================
-st.title("🍗 Customer Review Insights Bot")
-st.caption("Ask questions about your review dataset. The bot retrieves relevant chunks and generates grounded insights.")
+st.markdown(
+    """
+    <div class="hero-card">
+        <div class="hero-kicker">Grounded review analysis</div>
+        <h1 style="margin:0 0 0.25rem 0;">Customer Review Insights Bot</h1>
+        <p style="margin:0; color:#475569;">Ask about sentiment, recurring issues, operational opportunities, and draft follow-ups with evidence-backed answers.</p>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+
+col_intro, col_tip = st.columns([2, 1], gap="medium")
+with col_intro:
+    st.info("Use this workspace to inspect customer feedback, identify recurring themes, and turn observations into practical actions.")
+with col_tip:
+    st.markdown(
+        """
+        <div class="info-box">
+            <strong>Try asking:</strong><br>
+            • What are the most common complaints?<br>
+            • Draft an SMS response for unhappy guests.<br>
+            • Which issues should operations prioritize?
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
 cid = st.session_state.active_chat_id
 convo = st.session_state.conversations[cid]

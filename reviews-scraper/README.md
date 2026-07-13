@@ -1,35 +1,22 @@
-# Google Reviews Scraper
+# Review scraper notes
 
-Tool to extract google reviews for ai fine-tuning and research purposes.
+This folder contains a small helper for collecting review data from a browser page.
 
+## What it does
 
-This will get all reviews that are visible on the page.
+It helps you copy visible reviews from a Google Maps page into a JSON file that can be used by the main review analysis workflow.
 
-### steps:
+## How to use it
 
-1. **open the google reviews page**
-   - go to: https://share.google/rf2Ec6jS5V4IMRRKK
-   - or search for "Crimson Coward Fredericksburg" on google maps
-   - click on the business
-   - scroll down to the reviews section
+1. Open the reviews page in your browser.
+2. Scroll down until the reviews you want are loaded.
+3. Open the browser developer console.
+4. Paste the contents of simple_extract.js into the console and run it.
+5. Copy the JSON output and save it as a file such as reviews.json.
 
-2. **load all reviews**
-   - press down arrow to scroll down and load more reviews
-   - scroll down repeatedly until no more reviews load
-   - this may take a while if there are many reviews
+## Notes
 
-3. **extract reviews**
-   - open browser console (f12 or right-click > inspect > console)
-   - copy the code from `simple_extract.js`
-   - paste into console and press enter
-   - wait for it to finish
-
-4. **save the output**
-   - copy the json output from the console
-   - save it as `reviews.json`
-
-
-The json file contains all the reviews that were visible on the page.
+This is a manual helper and may not capture every review depending on the page and browser settings.
 
 
 
